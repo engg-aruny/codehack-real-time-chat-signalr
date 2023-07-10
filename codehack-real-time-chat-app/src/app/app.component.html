@@ -1,0 +1,24 @@
+<div class="chat-app">
+  <div class="header">
+    <h1>Real-time Chat App</h1>
+  </div>
+  <div class="chat-container">
+    <div class="user-section" *ngIf="!userName">
+      <input type="text" [(ngModel)]="tempUserName" placeholder="Enter your name" class="name-input" />
+      <button (click)="startChat()" class="start-button">Start Chat</button>
+    </div>
+    <div class="chat-box" *ngIf="userName">
+      <p class="user-name">Welcome, {{ userName }}!</p>
+      <ul class="message-list">
+        <li *ngFor="let msg of messages" class="message-item" [ngClass]="{'current-user': msg.sender === userName}">
+          <span class="message-sender">{{ msg.sender }}:</span> {{ msg.content }}
+        </li>
+      </ul>
+    </div>
+    <div class="input-section" *ngIf="userName">
+      <input type="text" [(ngModel)]="message" placeholder="Type a message" class="message-input"
+        (keydown.enter)="sendMessage()" />
+      <button (click)="sendMessage()" class="send-button">Send</button>
+    </div>
+  </div>
+</div>
